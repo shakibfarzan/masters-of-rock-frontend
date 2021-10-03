@@ -134,8 +134,6 @@ export function getDiscography(id) {
     let songs = []
     let albums = []
     songApi.songs.forEach(song => {
-        console.log(id)
-        console.log(song.artist._id)
         if (song.artist._id === id) {
             if (song.album.name === config['single-track']) {
                 songs.push(song)
