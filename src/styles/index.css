@@ -841,6 +841,9 @@ form .nav-link {
   .with-cover .rhap_stacked .rhap_controls-section {
     margin-top: -1rem !important;
   }
+  .rhap_controls-section {
+    margin-bottom: 1rem;
+  }
   .with-cover .top-of-cover {
     display: grid;
   }
@@ -869,7 +872,7 @@ form .nav-link {
   }
   h3,
   h2 {
-    font-size: large;
+    font-size: 18px;
     font-weight: bold;
   }
   h4 {

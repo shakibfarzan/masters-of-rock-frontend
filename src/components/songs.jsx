@@ -1,5 +1,5 @@
 import React from "react";
-import { getSongs } from "../services/fakeSongs";
+import { getSongs } from "../services/songService";
 import { toast } from "react-toastify";
 
 import ListPage from "./common/listPage";
@@ -15,11 +15,11 @@ class Songs extends ListPage {
     sort: { path: "name", order: "asc", title: "Name" },
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     const current = this.props.match.params.type
       ? [{ name: "type", title: this.props.match.params.type }]
       : [];
-    const data = getSongs();
+    const { data } = await getSongs();
     this.setState({ current, data });
   }
 

@@ -3,7 +3,7 @@ import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 import { toast } from "react-toastify";
 
-import { getSong } from "./../../services/fakeSongs";
+import { getSong, addRemoveLikes } from "./../../services/songService";
 import icons from "./icons";
 
 class Audio extends React.Component {
@@ -12,22 +12,30 @@ class Audio extends React.Component {
     currentSong: {},
   };
 
-  componentDidMount() {
-    const currentSong = getSong(this.props.id);
+  async componentDidMount() {
+    const { data: currentSong } = await getSong(this.props.id);
     this.setState({ currentSong });
   }
 
-  handleClickLikeBtn = () => {
-    const isLiked = this.state.isLiked ? false : true;
+  handleClickLikeBtn = async () => {
+    const orgIsLiked = this.state.isLiked;
+    const orgCurrentSong = this.state.currentSong;
+    const isLiked = orgIsLiked ? false : true;
     this.setState({ isLiked });
-    // const currentSong = { ...this.state.currentSong };
-    // if (this.state.isLiked) {
-    //   currentSong.isLiked++;
-    //   saveSong(currentSong);
-    // } else {
-    //   currentSong.isLiked--;
-    //   saveSong(currentSong);
-    // }
+    const currentSong = { ...orgCurrentSong };
+    if (isLiked) {
+      currentSong.likes += 1;
+    } else {
+      currentSong.likes -= 1;
+    }
+    try {
+      await addRemoveLikes(currentSong._id, currentSong.likes);
+    } catch (ex) {
+      if (ex.response && ex.response >= 400 && ex.response <= 500) {
+        toast.error(ex.response);
+      }
+      this.setState({ currentSong: orgCurrentSong, isLiked: orgIsLiked });
+    }
   };
 
   renderLikeBtn = () => {
@@ -161,7 +169,7 @@ class Audio extends React.Component {
     } = this.props;
     const cover = coverUrl
       ? coverUrl
-      : `${process.env.PUBLIC_URL}/images/covers/Cover-music.jpg`;
+      : `${process.env.REACT_APP_MEDIA_URL}/images/covers/Cover-music.jpg`;
     switch (type) {
       case "AlbumPage":
         return this.renderInAlbumPage(

@@ -1,5 +1,5 @@
 import React from "react";
-import { getSong } from "./../services/fakeSongs";
+import { getSong } from "./../services/songService";
 import { getCommentsOfGivenSong } from "../services/fakeComments";
 
 import Audio from "./common/audio";
@@ -12,8 +12,8 @@ class SongPage extends FormablePage {
     comments: [],
   };
 
-  componentWillMount() {
-    const currentSong = getSong(this.props.match.params.id);
+  async componentDidMount() {
+    const { data: currentSong } = await getSong(this.props.match.params.id);
     const comments = getCommentsOfGivenSong(this.props.match.params.id);
     this.setState({ currentSong, comments });
   }
