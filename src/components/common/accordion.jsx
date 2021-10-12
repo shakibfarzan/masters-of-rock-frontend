@@ -39,11 +39,7 @@ class Accordion extends React.Component {
         <div className="card card-fluid">
           <h1>{title}</h1>
           <h2>{subTitle}</h2>
-          <img
-            className={imageClass}
-            src={`${process.env.PUBLIC_URL}/${image}`}
-            alt={imageAlt}
-          />
+          <img className={imageClass} src={image} alt={imageAlt} />
           <div id="accordion" className="accordion">
             {this.renderCards(elements)}
           </div>

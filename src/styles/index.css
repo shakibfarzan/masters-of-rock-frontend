@@ -240,10 +240,6 @@ p.error {
 input::placeholder {
   font-size: medium;
 }
-
-.wrapper li {
-  font-size: x-small;
-}
 .eimnXo {
   min-height: 30px;
 }
@@ -252,6 +248,11 @@ input::placeholder {
 
 input {
   height: 100%;
+  font-size: 1.1rem !important;
+}
+
+input::placeholder {
+  font-size: 1.1rem !important;
 }
 
 input[type="text"],

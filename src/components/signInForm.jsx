@@ -16,7 +16,7 @@ class SignInForm extends FormablePage {
       style: "input",
       type: "text",
       name: "Username",
-      label: "Enter Username:",
+      label: "Enter Username",
     },
     {
       style: "input",

@@ -31,13 +31,15 @@ class CardsContainer extends React.Component {
     let elements = [];
     while (data1.length !== 0 || data2.length !== 0) {
       const firstItem = data1.shift();
+      const firstImg = firstItem.images[0];
       const secondItem = data2.shift();
+      const secondImg = secondItem.images[0];
       elements.push(
         <React.Fragment>
           <div className="col-6">
             <Card
               id={firstItem._id}
-              srcImage={firstItem.imageUrl}
+              srcImage={`${process.env.REACT_APP_MEDIA_URL}${firstImg}`}
               altImage={firstItem.name}
               heading={firstItem.name}
               paragraphText={firstItem.biography}
@@ -49,7 +51,7 @@ class CardsContainer extends React.Component {
             <div className="col-6">
               <Card
                 id={secondItem._id}
-                srcImage={secondItem.imageUrl}
+                srcImage={`${process.env.REACT_APP_MEDIA_URL}${secondImg}`}
                 altImage={secondItem.name}
                 heading={secondItem.name}
                 paragraphText={secondItem.biography}

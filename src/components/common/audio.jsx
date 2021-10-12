@@ -51,7 +51,7 @@ class Audio extends React.Component {
 
   renderPlayer = (url, name, artistName) => (
     <AudioPlayer
-      src={`${process.env.PUBLIC_URL}/${url}`}
+      src={`${process.env.REACT_APP_MEDIA_URL}${url}`}
       hasDefaultKeyBindings={true}
       showJumpControls={false}
       onPlay={() =>
@@ -70,7 +70,7 @@ class Audio extends React.Component {
 
   renderCover = (coverUrl, name) => (
     <img
-      src={`${process.env.PUBLIC_URL}/${coverUrl}`}
+      src={`${process.env.REACT_APP_MEDIA_URL}${coverUrl}`}
       alt={name}
       className={"cover"}
     />

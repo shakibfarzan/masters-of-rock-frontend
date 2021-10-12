@@ -1,74 +1,66 @@
 import React from "react";
-import { getArtist, getDiscography } from "./../services/fakeArtists";
+import { getArtist, getDiscography } from "./../services/artistService";
 import LineUp from "./lineUp";
 import Accordion from "./common/accordion";
 import Discography from "./discography";
 
 class ArtistPage extends React.Component {
   state = {
-    artist: {},
+    artistName: "",
+    artistEpithet: "",
+    artistImg: "",
+    elements: [],
   };
-  componentDidMount() {
-    const artist = getArtist(this.props.match.params.id);
-    this.setState({ artist });
+  async componentDidMount() {
+    const { data: artist } = await getArtist(this.props.match.params.id);
+    const { data } = await getDiscography(this.props.match.params.id);
+    const { albums, single_tracks } = data;
+    const elements = [
+      artist.biography && {
+        title: "Biography",
+        body: <p>{artist.biography}</p>,
+      },
+      (artist.lineUp || artist.line_up.length !== 0) && {
+        title: "Line Up",
+        body: <LineUp lineUp={artist.line_up} />,
+      },
+      artist.personal_influence && {
+        title: "Personal Influence",
+        body: <p>{artist.personal_influence}</p>,
+      },
+      artist.essential_stylistic_features && {
+        title: "Essential Stylistic Features",
+        body: <p>{artist.essential_stylistic_features}</p>,
+      },
+      artist.harmonic_material && {
+        title: "Harmonic Material",
+        body: <p>{artist.harmonic_material}</p>,
+      },
+      artist.sound && {
+        title: "Sound",
+        body: <p>{artist.sound}</p>,
+      },
+      (albums.length !== 0 || single_tracks.length !== 0) && {
+        title: "Discography",
+        body: <Discography albums={albums} singleTracks={single_tracks} />,
+      },
+    ];
+    this.setState({
+      artistName: artist.name,
+      artistEpithet: artist.epithet,
+      artistImg: artist.images[0],
+      elements,
+    });
   }
-
-  initParameters = () => {
-    const { artist } = this.state;
-    let elements = null;
-    if (artist) {
-      const { albums, singleTracks } = getDiscography(artist._id);
-      const hasAlbumsOrSingleTracks =
-        albums.length !== 0 || singleTracks.length !== 0;
-      elements = [
-        artist.biography && {
-          title: "Biography",
-          body: <p>{artist.biography}</p>,
-        },
-        artist.line_up && {
-          title: "Line Up",
-          body: <LineUp lineUp={artist.line_up} />,
-        },
-        artist.personal_influence && {
-          title: "Personal Influence",
-          body: <p>{artist.personal_influence}</p>,
-        },
-        artist.essential_stylistic_features && {
-          title: "Essential Stylistic Features",
-          body: <p>{artist.essential_stylistic_features}</p>,
-        },
-        artist.harmonic_material && {
-          title: "Harmonic Material",
-          body: <p>{artist.harmonic_material}</p>,
-        },
-        artist.sound && {
-          title: "Sound",
-          body: <p>{artist.sound}</p>,
-        },
-        hasAlbumsOrSingleTracks && {
-          title: "Discography",
-          body: <Discography albums={albums} singleTracks={singleTracks} />,
-        },
-      ];
-      return {
-        name: artist.name,
-        epithet: artist.epithet,
-        imageUrl: artist.imageUrl,
-        elements: elements,
-      };
-    }
-    return null;
-  };
-
   render() {
-    const params = this.initParameters();
-    const r = params ? (
+    const { artistName, artistEpithet, artistImg, elements } = this.state;
+    const r = artistName ? (
       <Accordion
-        title={params.name}
-        subTitle={params.epithet}
-        image={params.imageUrl}
-        imageAlt={params.name}
-        elements={params.elements}
+        title={artistName}
+        subTitle={artistEpithet}
+        image={`${process.env.REACT_APP_MEDIA_URL}${artistImg}`}
+        imageAlt={artistName}
+        elements={elements}
       />
     ) : (
       <h1 className="title">This Artist not found</h1>

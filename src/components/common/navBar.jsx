@@ -2,9 +2,9 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
-import { getArtists } from "../../services/fakeArtists";
-import { getAlbums } from "../../services/fakeAlbums";
-import { getSongs } from "../../services/fakeSongs";
+import { getArtists } from "../../services/artistService";
+import { getAlbums } from "../../services/albumService";
+import { getSongs } from "../../services/songService";
 
 class NavBar extends React.Component {
   state = {
@@ -12,8 +12,11 @@ class NavBar extends React.Component {
     collapse: "collapse navbar-collapse",
   };
 
-  componentDidMount() {
-    const items = [...getArtists(), ...getAlbums(), ...getSongs()];
+  async componentDidMount() {
+    const { data: artists } = await getArtists();
+    const { data: albums } = await getAlbums();
+    const { data: songs } = await getSongs();
+    const items = [...artists, ...albums, ...songs];
     this.setState({ items });
   }
 

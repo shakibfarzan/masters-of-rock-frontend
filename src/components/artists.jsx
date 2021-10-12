@@ -1,5 +1,5 @@
 import React from "react";
-import { getArtists } from "../services/fakeArtists";
+import { getArtists } from "../services/artistService";
 
 import Pagination from "./common/pagination";
 import CardsContainer from "./common/cardsContainer";
@@ -11,10 +11,11 @@ class Artists extends ListPage {
     currentPage: 1,
     pageSize: 4,
     sort: { path: "name", order: "asc", title: "Name" },
+    data: [],
   };
 
-  componentDidMount() {
-    const data = getArtists();
+  async componentDidMount() {
+    const { data } = await getArtists();
     this.setState({ data });
   }
 
@@ -41,11 +42,11 @@ class Artists extends ListPage {
           sortsAttr={sortsAttr}
           sortObj={this.state.sort}
         />
-        {this.getPageData().length === 0 ? (
+        {this.getPageData().total.length === 0 ? (
           <h1 className="title">There is no artists</h1>
         ) : (
           <React.Fragment>
-            <CardsContainer data={this.getPageData()} link={"artists"} />
+            <CardsContainer data={this.getPageData().page} link={"artists"} />
             <Pagination
               pageSize={this.state.pageSize}
               currentPage={this.state.currentPage}
