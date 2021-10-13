@@ -62,6 +62,8 @@ class Audio extends React.Component {
       src={`${process.env.REACT_APP_MEDIA_URL}${url}`}
       hasDefaultKeyBindings={true}
       showJumpControls={false}
+      autoPlay={false}
+      autoPlayAfterSrcChange={false}
       onPlay={() =>
         toast(`You are listen to ${name} by ${artistName}`, {
           position: "top-right",

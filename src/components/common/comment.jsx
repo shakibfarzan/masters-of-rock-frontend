@@ -1,11 +1,12 @@
 import React from "react";
 
 const Comment = ({ user, body, dateSent }) => {
-  const avatar = user.avatar ? user.avatar : "images/avatars/User_Avatar_2.png";
+  // const avatar = user.avatar ? user.avatar : "images/avatars/User_Avatar_2.png";
+  console.log(user);
   return (
     <div className="media mb-1">
       <img
-        src={`${process.env.PUBLIC_URL}/${avatar}`}
+        src={`${process.env.REACT_APP_MEDIA_URL}${user.avatar}`}
         alt={`${user.name.firstname} ${user.name.lastname} avatar`}
         className="align-self-start mr-3"
       />

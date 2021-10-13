@@ -1,6 +1,6 @@
 import React from "react";
 import { getSong } from "./../services/songService";
-import { getCommentsOfGivenSong } from "../services/fakeComments";
+import { getCommentsOfGivenSong } from "../services/commentService";
 
 import Audio from "./common/audio";
 import CommentContainer from "./common/commentContainer";
@@ -9,17 +9,35 @@ import FormablePage from "./common/formablePage";
 class SongPage extends FormablePage {
   state = {
     currentSong: {},
+    artistName: "",
+    albumName: "",
+    genreName: "",
+    cover: "",
     comments: [],
   };
 
   async componentDidMount() {
     const { data: currentSong } = await getSong(this.props.match.params.id);
-    const comments = getCommentsOfGivenSong(this.props.match.params.id);
-    this.setState({ currentSong, comments });
+    const artistName = currentSong.artist.name;
+    const albumName = currentSong.album.name;
+    const genreName = currentSong.genre.name;
+    const cover = currentSong.album.cover;
+    const { data: comments } = await getCommentsOfGivenSong(
+      this.props.match.params.id
+    );
+    this.setState({
+      currentSong,
+      comments,
+      artistName,
+      albumName,
+      genreName,
+      cover,
+    });
   }
 
   render() {
-    const { currentSong, comments } = this.state;
+    const { currentSong, comments, artistName, albumName, genreName, cover } =
+      this.state;
     return (
       <div className="component">
         {currentSong ? (
@@ -29,11 +47,11 @@ class SongPage extends FormablePage {
                 <Audio
                   id={currentSong._id}
                   name={currentSong.name}
-                  artistName={currentSong.artist.name}
-                  albumName={currentSong.album.name}
-                  genre={currentSong.genre.name}
+                  artistName={artistName}
+                  albumName={albumName}
+                  genre={genreName}
                   url={currentSong.url}
-                  coverUrl={currentSong.album.cover}
+                  coverUrl={cover}
                   type="SongPage"
                 />
               </div>

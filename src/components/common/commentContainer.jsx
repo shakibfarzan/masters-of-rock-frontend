@@ -26,7 +26,7 @@ const CommentContainer = ({ comments, onChange, onSubmit }) => {
               key={comment._id}
               user={comment.user}
               body={comment.body}
-              dateSent={comment.dateSent.toDateString()}
+              dateSent={new Date(comment.dateSent).toDateString()}
             />
           ))
         )}
