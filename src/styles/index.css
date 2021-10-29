@@ -729,6 +729,37 @@ form .nav-link {
   background-color: var(--color-primary);
 }
 
+/* Suggestion form */
+
+.suggestion-form {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  backdrop-filter: blur(5px);
+  transition: opacity 500ms;
+  margin-top: 5rem;
+  padding: 1.2rem;
+  visibility: hidden;
+  opacity: 0;
+}
+.suggestion-form h2 {
+  text-align: left;
+}
+.suggestion-form:target {
+  visibility: visible;
+  opacity: 1;
+}
+.close {
+  font-size: 30px;
+  font-weight: bold;
+  color: var(--color-primary-darker);
+  transition: color 0.15s ease-in-out;
+}
+.close:hover {
+  color: var(--color-primary);
+}
 @media only screen and (max-width: 1200px) {
   .carousel-inner img {
     height: 30rem;
@@ -957,12 +988,12 @@ form .nav-link {
     font-size: 18px;
     font-weight: bold;
   }
-  h4,
-  .component .dzu-inputLabel {
+  h4 {
     font-size: medium;
     font-weight: bold;
   }
-  p {
+  p,
+  .component .dzu-inputLabel {
     font-size: smaller;
   }
   .search-box {

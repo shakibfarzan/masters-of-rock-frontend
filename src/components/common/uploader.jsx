@@ -8,6 +8,7 @@ const Uploader = ({
   maxFiles,
   minSizeBytes,
   maxSizeBytes,
+  onSubmit,
 }) => {
   const getUploadParams = ({ meta }) => {
     return { url: "https://httpbin.org/post" };
@@ -17,19 +18,13 @@ const Uploader = ({
     console.log(status, meta, file);
   };
 
-  // receives array of files that are done uploading when submit button is clicked
-  const handleSubmit = (files, allFiles) => {
-    console.log(files);
-    allFiles.forEach((f) => f.remove());
-  };
-
   return (
     <Dropzone
       submitButtonContent={submitText}
       inputContent={text}
       getUploadParams={getUploadParams}
       onChangeStatus={handleChangeStatus}
-      onSubmit={handleSubmit}
+      onSubmit={onSubmit}
       accept={acceptFiles}
       maxFiles={maxFiles}
       minSizeBytes={minSizeBytes}

@@ -2,7 +2,6 @@ import React, { Component } from "react"
 import { Switch, Route, Redirect } from "react-router-dom"
 import { ToastContainer } from 'react-toastify';
 
-import './styles/essential_audio.css'
 import './styles/normalize.css'
 import "./styles/bootstrap.min.css";
 import './styles/index.css'
