@@ -22,10 +22,15 @@ import AlbumPage from './components/albumPage';
 import SongPage from './components/songPage';
 import ScrollToTop from "./components/common/scrollToTop";
 import ForgetPassword from './components/forgetPasswordPage';
+import ProfilePage from './components/profilePage';
+import auth from './services/authService'
+import FavoritesPage from "./components/favoritesPage";
 
 
 
 class App extends Component {
+
+  state = {}
 
   componentDidMount() {
     const essential = document.createElement("script")
@@ -33,9 +38,12 @@ class App extends Component {
     essential.async = true
 
     document.body.appendChild(essential)
+    const user = auth.getCurrentUser()
+    this.setState({ user })
   }
 
   render() {
+    const { user } = this.state
     return <React.Fragment>
       <ToastContainer
         position="top-right"
@@ -49,7 +57,7 @@ class App extends Component {
         pauseOnHover
       />
       <header>
-        <NavBar />
+        <NavBar user={user} />
       </header>
       <main className="container">
 
@@ -67,6 +75,8 @@ class App extends Component {
           <Route path="/suggestion" component={SuggestionPage} />
           <Route path="/yourExperience" component={UserExperience} />
           <Route path="/forgetPassword" component={ForgetPassword} />
+          <Route path="/profile" render={props => <ProfilePage {...props} user={user} />} />
+          <Route path="/favorites" component={FavoritesPage} />
           <Route path="/not-found" component={NotFound} />
           <Redirect from="/" exact to="/homePage" />
           <Redirect to="/not-found" />

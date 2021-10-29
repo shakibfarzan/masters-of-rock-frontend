@@ -37,7 +37,8 @@ h3,
 h4,
 h5,
 h6,
-p {
+p,
+.component .dzu-inputLabel {
   color: var(--color-text);
   font-family: "Cinzel", serif;
 }
@@ -174,6 +175,30 @@ p.error {
   border: none;
 }
 
+.u-link {
+  margin-top: 0.7rem;
+}
+
+img.align-self-start {
+  margin-left: 1rem;
+}
+
+.nav-avatar {
+  border-radius: 30px;
+  border: solid 3px var(--color-secondary-darker);
+}
+
+.nav-item .dropdown {
+  margin-top: 0.8rem;
+}
+
+.dropdown-container {
+  display: flex;
+}
+
+.dropdown-item.active {
+  background-color: var(--color-secondary-darker);
+}
 /* Button */
 
 .btn {
@@ -653,6 +678,57 @@ form .nav-link {
   margin-bottom: 1rem;
 }
 
+/* DropZone */
+.component .dzu-dropzone {
+  border-radius: 0;
+  backdrop-filter: blur(3px);
+  border-color: var(--color-secondary-darker);
+  overflow-y: auto;
+  overflow-x: auto;
+}
+.component .dzu-inputLabel {
+  text-align: center;
+  padding: 0.5rem;
+}
+.component .dzu-inputLabelWithFiles {
+  background-color: var(--color-primary-darker);
+  color: var(--color-text);
+  border-radius: 0;
+  transition: all 0.5s ease;
+}
+
+.component .dzu-inputLabelWithFiles:hover {
+  background-color: var(--color-primary);
+  color: var(--color-dark);
+}
+
+.component .dzu-submitButton {
+  background-color: var(--color-secondary-darker);
+  border-radius: 0;
+  transition: all 0.5s ease;
+}
+
+.component .dzu-submitButton:hover {
+  background-color: var(--color-secondary);
+}
+
+.component .dzu-previewImage {
+  box-shadow: 0 0 15px 5px var(--color-primary-lighter);
+  width: 25%;
+  max-height: 50%;
+}
+
+.component .dzu-previewButton {
+  background-color: var(--color-primary-darker);
+  padding: 0.7rem;
+  border-radius: 30px;
+  transition: all 0.5s ease;
+}
+
+.component .dzu-previewButton:hover {
+  background-color: var(--color-primary);
+}
+
 @media only screen and (max-width: 1200px) {
   .carousel-inner img {
     height: 30rem;
@@ -706,7 +782,8 @@ form .nav-link {
     font-weight: bold;
   }
   h4,
-  .navbar-brand {
+  .navbar-brand,
+  .component .dzu-inputLabel {
     font-size: larger;
     font-weight: bold;
   }
@@ -720,7 +797,9 @@ form .nav-link {
   }
   .btn,
   .page-link,
-  .dropdown-item {
+  .dropdown-item,
+  .component .dzu-submitButton,
+  .component .dzu-previewButton {
     font-size: smaller;
   }
 
@@ -776,7 +855,8 @@ form .nav-link {
     font-size: larger;
     font-weight: bold;
   }
-  h4 {
+  h4,
+  .component .dzu-inputLabel {
     font-size: large;
     font-weight: bold;
   }
@@ -789,7 +869,9 @@ form .nav-link {
   }
   .btn,
   .nav-link,
-  .page-link {
+  .page-link,
+  .component .dzu-submitButton,
+  .component .dzu-previewButton {
     font-size: small;
   }
 
@@ -875,7 +957,8 @@ form .nav-link {
     font-size: 18px;
     font-weight: bold;
   }
-  h4 {
+  h4,
+  .component .dzu-inputLabel {
     font-size: medium;
     font-weight: bold;
   }
@@ -891,7 +974,9 @@ form .nav-link {
   }
   .btn,
   .nav-link,
-  .page-link {
+  .page-link,
+  .component .dzu-submitButton,
+  .component .dzu-previewButton {
     font-size: smaller;
   }
   .dropdown-item {

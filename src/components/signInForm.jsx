@@ -1,13 +1,16 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
+import { toast } from "react-toastify";
 import Form from "./common/form";
 import * as yup from "yup";
 import FormablePage from "./common/formablePage";
+import auth from "../services/authService";
 
 class SignInForm extends FormablePage {
   schema = yup
     .object({
-      Username: yup.string().required().min(5).max(30),
-      Password: yup.string().required().min(8),
+      username: yup.string().required().min(5).max(30),
+      password: yup.string().required().min(8),
     })
     .required();
 
@@ -15,13 +18,13 @@ class SignInForm extends FormablePage {
     {
       style: "input",
       type: "text",
-      name: "Username",
+      name: "username",
       label: "Enter Username",
     },
     {
       style: "input",
       type: "password",
-      name: "Password",
+      name: "password",
       label: "Enter Password",
     },
     {
@@ -31,7 +34,21 @@ class SignInForm extends FormablePage {
     },
   ];
 
+  onSubmit = async () => {
+    try {
+      const { inputData } = this.state;
+      await auth.signIn(inputData.username, inputData.password);
+      const { state } = this.props.location;
+      window.location = state ? state.from.pathname : "/";
+    } catch (ex) {
+      if (ex.response && ex.response.status === 400) {
+        toast.error(ex.response.data);
+      }
+    }
+  };
+
   render() {
+    if (auth.getCurrentUser()) return <Redirect to="/" />;
     return (
       <div className="component">
         <div className="form-container">

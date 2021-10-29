@@ -82,32 +82,6 @@ const Form = ({ inputs, schema, onSubmit, onChange, btnTitle, btnIcon }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} onChange={onChange}>
-      {/* {inputs.map((i) =>
-        i.style === "textarea" ? (
-          <div className="form-group">
-            <textarea
-              className="form-control"
-              rows="5"
-              id={i.name}
-              name={i.name}
-              type={i.type}
-              placeholder={`${i.name}...`}
-              {...register(i.name)}
-            ></textarea>
-            <p className="error">{errors[i.name]?.message}</p>
-          </div>
-        ) : (
-          <div className="form-group">
-            <label htmlFor={i.name}>{i.label}</label>
-            <input
-              name={i.name}
-              id={i.name}
-              type={i.type}
-              className="form-control"
-            />
-          </div>
-        )
-      )} */}
       {renderInputs()}
       {btnTitle && (
         <button type="submit" className="btn btn-outline">

@@ -20,7 +20,17 @@ class Songs extends ListPage {
       ? [{ name: "type", title: this.props.match.params.type }]
       : [];
     const { data } = await getSongs();
-    this.setState({ current, data });
+    const songsData = data.map((s) => ({
+      id: s._id,
+      name: s.name,
+      artistName: s.artist.name,
+      albumName: s.album.name,
+      genre: s.genre.name,
+      url: s.url,
+      cover: s.album.cover,
+      type: s.type,
+    }));
+    this.setState({ current, data: songsData });
   }
 
   searchQueryFunction = (array) => {
@@ -28,9 +38,9 @@ class Songs extends ListPage {
     return array.filter(
       (s) =>
         s.name.toLowerCase().includes(query) ||
-        s.artist.name.toLowerCase().includes(query) ||
-        s.album.name.toLowerCase().includes(query) ||
-        s.genre.name.toLowerCase().includes(query) ||
+        s.artistName.toLowerCase().includes(query) ||
+        s.albumName.toLowerCase().includes(query) ||
+        s.genre.toLowerCase().includes(query) ||
         s.type.toLowerCase().includes(query)
     );
   };
@@ -117,14 +127,14 @@ class Songs extends ListPage {
             <div className="audios">
               {this.getPageData().page.map((s) => (
                 <Audio
-                  id={s._id}
+                  id={s.id}
                   name={s.name}
-                  artistName={s.artist.name}
-                  albumName={s.album.name}
-                  genre={s.genre.name}
+                  artistName={s.artistName}
+                  albumName={s.albumName}
+                  genre={s.genre}
                   url={s.url}
-                  coverUrl={s.album.cover}
-                  onComment={() => this.handleClickComment(s._id)}
+                  coverUrl={s.cover}
+                  onComment={() => this.handleClickComment(s.id)}
                   type={"Songs"}
                 />
               ))}

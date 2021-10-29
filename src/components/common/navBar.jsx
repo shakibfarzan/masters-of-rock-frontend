@@ -21,7 +21,6 @@ class NavBar extends React.Component {
   }
 
   handleOnSelect = (item) => {
-    console.log(item);
     let type = "";
     if (item.biography) type = "Artist";
     else if (item.album) type = "Song";
@@ -58,6 +57,8 @@ class NavBar extends React.Component {
   };
 
   render() {
+    const { user } = this.props;
+    const linkClass = user ? "u-link" : "";
     return (
       <nav className="navbar navbar-expand-md fixed-top">
         <button
@@ -95,28 +96,72 @@ class NavBar extends React.Component {
         <div className={this.state.collapse} id="collapsibleNavbar">
           <ul className="navbar-nav">
             <li className="nav-item" onClick={this.handleClickOnLinks}>
-              <NavLink to={"/artists"} className="nav-link">
+              <NavLink to={"/artists"} className={`nav-link ${linkClass}`}>
                 Artists
               </NavLink>
             </li>
-            <li className="nav-item" onClick={this.handleClickOnLinks}>
-              <NavLink to={"/songs"} className="nav-link">
-                Songs
-              </NavLink>
-            </li>
-            <li
-              className="nav-item mb-2 mr-3"
-              onClick={this.handleClickOnLinks}
-            >
-              <NavLink to={"/signIn"} className="nav-link">
-                Sign In
-              </NavLink>
-            </li>
-            <li className="nav-item" onClick={this.handleClickOnLinks}>
-              <NavLink to={"/createAccount"} className="btn btn-primary-m">
-                Create Account
-              </NavLink>
-            </li>
+            {user ? (
+              <>
+                <li
+                  className="nav-item mb-1 mr-3"
+                  onClick={this.handleClickOnLinks}
+                >
+                  <NavLink to={"/songs"} className={`nav-link ${linkClass}`}>
+                    Songs
+                  </NavLink>
+                </li>
+                <li className="nav-item" onClick={this.handleClickOnLinks}>
+                  <div className="dropdown-container">
+                    <div className="nav-item dropdown">
+                      <button
+                        type="button"
+                        className="btn btn-primary-m dropdown-toggle"
+                        data-toggle="dropdown"
+                      >
+                        {user.username}
+                      </button>
+                      <div className="dropdown-menu">
+                        <NavLink to={"/favorites"} className="dropdown-item">
+                          My Favorite Songs
+                        </NavLink>
+                        <NavLink to={"/suggestion"} className="dropdown-item">
+                          Suggestions
+                        </NavLink>
+                        <NavLink to={"/profile"} className="dropdown-item">
+                          Edit profile
+                        </NavLink>
+                      </div>
+                    </div>
+                    <img
+                      src={`${process.env.REACT_APP_MEDIA_URL}${user.avatar}`}
+                      alt="avatar"
+                      className="align-self-start nav-avatar"
+                    />
+                  </div>
+                </li>
+              </>
+            ) : (
+              <>
+                <li className="nav-item" onClick={this.handleClickOnLinks}>
+                  <NavLink to={"/songs"} className="nav-link">
+                    Songs
+                  </NavLink>
+                </li>
+                <li
+                  className="nav-item mb-2 mr-3"
+                  onClick={this.handleClickOnLinks}
+                >
+                  <NavLink to={"/signIn"} className="nav-link">
+                    Sign In
+                  </NavLink>
+                </li>
+                <li className="nav-item" onClick={this.handleClickOnLinks}>
+                  <NavLink to={"/createAccount"} className="btn btn-primary-m">
+                    Create Account
+                  </NavLink>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </nav>
