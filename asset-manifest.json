@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/shakibfarzan/masters-of-rock-frontend/static/css/main.96cb5f62.chunk.css",
+    "main.js": "/shakibfarzan/masters-of-rock-frontend/static/js/main.4aeff816.chunk.js",
+    "main.js.map": "/shakibfarzan/masters-of-rock-frontend/static/js/main.4aeff816.chunk.js.map",
+    "runtime-main.js": "/shakibfarzan/masters-of-rock-frontend/static/js/runtime-main.7a197031.js",
+    "runtime-main.js.map": "/shakibfarzan/masters-of-rock-frontend/static/js/runtime-main.7a197031.js.map",
+    "static/css/2.59633d1e.chunk.css": "/shakibfarzan/masters-of-rock-frontend/static/css/2.59633d1e.chunk.css",
+    "static/js/2.c493666d.chunk.js": "/shakibfarzan/masters-of-rock-frontend/static/js/2.c493666d.chunk.js",
+    "static/js/2.c493666d.chunk.js.map": "/shakibfarzan/masters-of-rock-frontend/static/js/2.c493666d.chunk.js.map",
+    "static/js/3.3d0a60b4.chunk.js": "/shakibfarzan/masters-of-rock-frontend/static/js/3.3d0a60b4.chunk.js",
+    "static/js/3.3d0a60b4.chunk.js.map": "/shakibfarzan/masters-of-rock-frontend/static/js/3.3d0a60b4.chunk.js.map",
+    "index.html": "/shakibfarzan/masters-of-rock-frontend/index.html",
+    "static/css/2.59633d1e.chunk.css.map": "/shakibfarzan/masters-of-rock-frontend/static/css/2.59633d1e.chunk.css.map",
+    "static/css/main.96cb5f62.chunk.css.map": "/shakibfarzan/masters-of-rock-frontend/static/css/main.96cb5f62.chunk.css.map",
+    "static/js/2.c493666d.chunk.js.LICENSE.txt": "/shakibfarzan/masters-of-rock-frontend/static/js/2.c493666d.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/shakibfarzan/masters-of-rock-frontend/static/media/cool-background.33a8f8b1.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.7a197031.js",
+    "static/css/2.59633d1e.chunk.css",
+    "static/js/2.c493666d.chunk.js",
+    "static/css/main.96cb5f62.chunk.css",
+    "static/js/main.4aeff816.chunk.js"
+  ]
+}
